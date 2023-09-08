@@ -1,6 +1,7 @@
 package com.example.retail.web;
 
 
+import com.example.retail.usecase.BillNotFoundException;
 import com.example.retail.usecase.CalculateBillNetPayableAmount;
 import com.example.retail.usecase.CalculateBillNetPayableAmountException;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.example.retail.web.ControllerExceptionHandler.BILL_NOT_FOUND_MESSAGE_EN;
+import static com.example.retail.web.ControllerExceptionHandler.BILL_PAYABLE_AMOUNT_CALCULATION_ERROR_MESSAGE_EN;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -45,7 +47,7 @@ public class BillControllerTest {
     }
 
     @Test
-    public void whenNonExistingBill_thenReturnErrorMessage() throws Exception {
+    public void whenNonExistingBill_thenReturn400AndErrorMessage() throws Exception {
         mockNonExistingBill();
         mockMvc.perform(get(String.format("/api/bills/%s/net-payable-amount",NON_EXISTING_BILL_ID))
                         .contentType("application/json"))
@@ -54,8 +56,22 @@ public class BillControllerTest {
         verify(calculateBillNetPayableAmount,times(1)).forBill(eq(NON_EXISTING_BILL_ID));
     }
 
+    @Test
+    public void whenCalculatePayableAmountException_thenReturn500AndErrorMessage() throws Exception {
+        mockCalculationException();
+        mockMvc.perform(get(String.format("/api/bills/%s/net-payable-amount",EXISTING_BILL_ID))
+                        .contentType("application/json"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value(String.format(BILL_PAYABLE_AMOUNT_CALCULATION_ERROR_MESSAGE_EN, EXISTING_BILL_ID)));
+        verify(calculateBillNetPayableAmount,times(1)).forBill(eq(EXISTING_BILL_ID));
+    }
+
+    private void mockCalculationException() {
+        when(calculateBillNetPayableAmount.forBill(EXISTING_BILL_ID)).thenThrow(new CalculateBillNetPayableAmountException(EXISTING_BILL_ID));
+    }
+
     private void mockNonExistingBill() {
-        when(calculateBillNetPayableAmount.forBill(NON_EXISTING_BILL_ID)).thenThrow(new CalculateBillNetPayableAmountException(NON_EXISTING_BILL_ID));
+        when(calculateBillNetPayableAmount.forBill(NON_EXISTING_BILL_ID)).thenThrow(new BillNotFoundException(NON_EXISTING_BILL_ID));
     }
 
 
