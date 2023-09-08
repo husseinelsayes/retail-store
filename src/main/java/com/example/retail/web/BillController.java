@@ -1,6 +1,6 @@
 package com.example.retail.web;
 
-import com.example.retail.usecase.CalculateBillNetPayableAmount;
+import com.example.retail.core.usecase.CalculateBillNetPayableAmount;
 import com.example.retail.web.response.BillNetPayableAmountResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
