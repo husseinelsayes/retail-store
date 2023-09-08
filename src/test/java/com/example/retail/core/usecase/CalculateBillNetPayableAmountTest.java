@@ -11,12 +11,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class CalculateBillNetPayableAmountTest {
     private static final Long NON_EXISTING_BILL_ID = 87L;
     private static final Long EXISTING_BILL_ID = 7L;
+    private static final Double BILL_ITEMS_TOTAL_AMOUNT_BEFORE_DISCOUNT = 1500.79;
+    private static final Double BILL_ELIGIBLE_DISCOUNT = 300.00;
+    private static final Double BILL_NET_PAYABLE_AMOUNT = 1200.79;
 
     @Mock
     private GetBill getBill;
@@ -42,6 +46,16 @@ class CalculateBillNetPayableAmountTest {
         when(getBill.byId(EXISTING_BILL_ID)).thenReturn(existingBill());
         calculateBillNetPayableAmount.forBill(EXISTING_BILL_ID);
         verify(calculateBillEligibleDiscount,times(1)).forBill(eq(existingBill()));
+    }
+
+    @Test
+    public void givenCalculatedDiscount_thenApplyOnBillTotalAmount(){
+        Bill bill = spy(existingBill());
+        when(bill.getTotalItemsAmount()).thenReturn(BILL_ITEMS_TOTAL_AMOUNT_BEFORE_DISCOUNT);
+        when(getBill.byId(EXISTING_BILL_ID)).thenReturn(bill);
+        when(calculateBillEligibleDiscount.forBill(bill)).thenReturn(BILL_ELIGIBLE_DISCOUNT);
+        Double netPayableAmount = calculateBillNetPayableAmount.forBill(EXISTING_BILL_ID);
+        assertEquals(BILL_NET_PAYABLE_AMOUNT, netPayableAmount);
     }
 
     private Bill existingBill() {

@@ -20,6 +20,6 @@ public class CalculateBillNetPayableAmountImpl implements CalculateBillNetPayabl
     public Double forBill(Long billId) {
         Bill bill = getBill.byId(billId);
         Double discount = calculateBillEligibleDiscount.forBill(bill);
-        return null;
+        return bill.getTotalItemsAmount() - discount;
     }
 }

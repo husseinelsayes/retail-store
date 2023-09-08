@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Bill {
     Long id;
@@ -13,6 +14,10 @@ public class Bill {
 
     public Bill(User issuedFor){
         this.issuedFor = issuedFor;
+    }
+
+    public Double getTotalItemsAmount(){
+        return items == null || items.size() == 0 ? 0.0 : items.stream().map(i -> i.getPrice()).collect(Collectors.summingDouble(Double::doubleValue));
     }
 
     @Override
