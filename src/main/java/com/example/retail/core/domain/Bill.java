@@ -1,11 +1,13 @@
 package com.example.retail.core.domain;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+@Getter
 public class Bill {
     Long id;
     User issuedFor;

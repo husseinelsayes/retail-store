@@ -1,9 +1,8 @@
 package com.example.retail.web;
 
-
-import com.example.retail.core.usecase.BillNotFoundException;
+import com.example.retail.core.usecase.exception.BillNotFoundException;
 import com.example.retail.core.usecase.CalculateBillNetPayableAmount;
-import com.example.retail.core.usecase.CalculateBillNetPayableAmountException;
+import com.example.retail.core.usecase.exception.CalculateBillNetPayableAmountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
