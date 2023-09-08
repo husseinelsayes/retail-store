@@ -24,12 +24,11 @@ class CalculateBillPercentageDiscountTest {
     private static final LocalDateTime MORE_THAN_TWO_YEARS_CREATED_DATE = LocalDateTime.of(2020,1,1,0,0);
     private static final LocalDateTime LESS_THAN_TWO_YEARS_CREATED_DATE = LocalDateTime.of(2022,1,1,0,0);
     private static final Integer CUSTOMER_LOYALTY_THRESHOLD_IN_YEARS = 2;
+    private static final Double NO_DISCOUNT_AMOUNT = 0.0;
     @Mock
     private BillPercentageDiscountConfig billPercentageDiscountConfig;
     CalculateBillPercentageDiscount calculateBillPercentageDiscount;
-    // if userType is employee percentage is 30%
-    // if userType is affiliate percentage is 10%
-    // is userType is 2 years customer percentage is 5%
+
     @BeforeEach
     public void setup(){
         calculateBillPercentageDiscount = new CalculateBillPercentageDiscountImpl(billPercentageDiscountConfig);
@@ -60,6 +59,14 @@ class CalculateBillPercentageDiscountTest {
         when(billPercentageDiscountConfig.getCustomerLoyaltyPeriodInYears()).thenReturn(CUSTOMER_LOYALTY_THRESHOLD_IN_YEARS);
         Double percentageDiscount = calculateBillPercentageDiscount.forBill(bill);
         assertEquals(LOYAL_CUSTOMER_PERCENT_DISCOUNT_AMOUNT / 100 * BILL_TOTAL_ITEMS_AMOUNT,percentageDiscount);
+    }
+
+    @Test
+    public void givenBillForNotPassingLoyaltyPeriodCustomer_thenNoPercentDiscountApplied(){
+        Bill bill = spy(existingBill(mockUser(UserTypeEnum.CUSTOMER,LESS_THAN_TWO_YEARS_CREATED_DATE)));
+        when(billPercentageDiscountConfig.getCustomerLoyaltyPeriodInYears()).thenReturn(CUSTOMER_LOYALTY_THRESHOLD_IN_YEARS);
+        Double percentageDiscount = calculateBillPercentageDiscount.forBill(bill);
+        assertEquals(NO_DISCOUNT_AMOUNT,percentageDiscount);
     }
 
     private Bill existingBill(User issuedFor) {
