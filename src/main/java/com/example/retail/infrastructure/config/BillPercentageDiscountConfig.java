@@ -13,6 +13,8 @@ public class BillPercentageDiscountConfig {
     private Double affiliate;
     @NotBlank
     private Double loyalCustomer;
+    @NotBlank
+    private Integer customerLoyaltyPeriodInYears;
 
     public Double forEmployee(){
         return this.employee;
@@ -24,5 +26,9 @@ public class BillPercentageDiscountConfig {
 
     public Double forLoyalCustomer(){
         return this.loyalCustomer;
+    }
+
+    public Integer getCustomerLoyaltyPeriodInYears() {
+        return customerLoyaltyPeriodInYears;
     }
 }
