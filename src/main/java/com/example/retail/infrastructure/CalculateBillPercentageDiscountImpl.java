@@ -13,14 +13,17 @@ public class CalculateBillPercentageDiscountImpl implements CalculateBillPercent
     @Override
     public Double forBill(Bill bill) {
         switch (bill.getIssuedFor().getUserType()){
-            case EMPLOYEE -> {
-                return getEmployeeDiscount(bill);
-            }
+            case EMPLOYEE : return getEmployeeDiscount(bill);
+            case AFFILIATE : return getAffiliateDiscount(bill);
         }
         return null;
     }
 
     private Double getEmployeeDiscount(Bill bill){
         return billPercentageDiscountConfig.forEmployee() / 100 * bill.getTotalItemsAmount();
+    }
+
+    private Double getAffiliateDiscount(Bill bill){
+        return billPercentageDiscountConfig.forAffiliate() / 100 * bill.getTotalItemsAmount();
     }
 }

@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 class CalculateBillPercentageDiscountTest {
     private static final Double BILL_TOTAL_ITEMS_AMOUNT = 100.00;
     private static final Double EMPLOYEE_PERCENT_DISCOUNT_AMOUNT = 30.00;
+    private static final Double AFFILIATE_PERCENT_DISCOUNT_AMOUNT = 10.00;
     @Mock
     private BillPercentageDiscountConfig billPercentageDiscountConfig;
     CalculateBillPercentageDiscount calculateBillPercentageDiscount;
@@ -29,12 +30,21 @@ class CalculateBillPercentageDiscountTest {
         calculateBillPercentageDiscount = new CalculateBillPercentageDiscountImpl(billPercentageDiscountConfig);
     }
     @Test
-    public void givenEmployeeBill_thenCalculate30PercentDiscount(){
+    public void givenEmployeeBill_thenCalculateEmployeePercentDiscount(){
         Bill bill = spy(existingBill(mockUser(UserTypeEnum.EMPLOYEE)));
         when(bill.getTotalItemsAmount()).thenReturn(BILL_TOTAL_ITEMS_AMOUNT);
         when(billPercentageDiscountConfig.forEmployee()).thenReturn(EMPLOYEE_PERCENT_DISCOUNT_AMOUNT);
         Double percentageDiscount = calculateBillPercentageDiscount.forBill(bill);
         assertEquals(EMPLOYEE_PERCENT_DISCOUNT_AMOUNT / 100 * BILL_TOTAL_ITEMS_AMOUNT,percentageDiscount);
+    }
+
+    @Test
+    public void givenAffiliateBill_thenCalculateAffiliatePercentDiscount(){
+        Bill bill = spy(existingBill(mockUser(UserTypeEnum.AFFILIATE)));
+        when(bill.getTotalItemsAmount()).thenReturn(BILL_TOTAL_ITEMS_AMOUNT);
+        when(billPercentageDiscountConfig.forAffiliate()).thenReturn(AFFILIATE_PERCENT_DISCOUNT_AMOUNT);
+        Double percentageDiscount = calculateBillPercentageDiscount.forBill(bill);
+        assertEquals(AFFILIATE_PERCENT_DISCOUNT_AMOUNT / 100 * BILL_TOTAL_ITEMS_AMOUNT,percentageDiscount);
     }
 
     private Bill existingBill(User issuedFor) {
