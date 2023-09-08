@@ -58,6 +58,15 @@ class CalculateBillNetPayableAmountTest {
         assertEquals(BILL_NET_PAYABLE_AMOUNT, netPayableAmount);
     }
 
+    @Test
+    public void whenCalculateDiscountException_thenThrowException(){
+        when(calculateBillEligibleDiscount.forBill(any())).thenThrow(new CalculateBillEligibleDiscountException(EXISTING_BILL_ID));
+        CalculateBillEligibleDiscountException exception = assertThrows(CalculateBillEligibleDiscountException.class, ()->{
+            calculateBillNetPayableAmount.forBill(EXISTING_BILL_ID);
+        });
+        assertEquals(EXISTING_BILL_ID, exception.getBillId());
+    }
+
     private Bill existingBill() {
         return new Bill(null);
     }
