@@ -23,16 +23,25 @@ public class CalculateBillPercentageDiscountImpl implements CalculateBillPercent
     }
 
     private Double getEmployeeDiscount(Bill bill){
-        return billPercentageDiscountConfig.forEmployee() / 100 * bill.getTotalItemsAmount();
+        return billPercentageDiscountConfig.forEmployee() / 100 *
+                bill.getTotalItemsAmountExcludingCategories(
+                        billPercentageDiscountConfig.getDiscountExcludedProducts()
+                );
     }
 
     private Double getAffiliateDiscount(Bill bill){
-        return billPercentageDiscountConfig.forAffiliate() / 100 * bill.getTotalItemsAmount();
+        return billPercentageDiscountConfig.forAffiliate() / 100 *
+                bill.getTotalItemsAmountExcludingCategories(
+                        billPercentageDiscountConfig.getDiscountExcludedProducts()
+                );
     }
 
     private Double getLoyalCustomerDiscount(Bill bill){
+        Double customerDiscount = billPercentageDiscountConfig.forLoyalCustomer();
         if(numberOfYearsBetween(bill.getIssuedFor().getCreatedAt(), LocalDateTime.now()) > billPercentageDiscountConfig.getCustomerLoyaltyPeriodInYears()){
-            return billPercentageDiscountConfig.forLoyalCustomer() / 100 * bill.getTotalItemsAmount();
+            return billPercentageDiscountConfig.forLoyalCustomer() / 100 * bill.getTotalItemsAmountExcludingCategories(
+                    billPercentageDiscountConfig.getDiscountExcludedProducts()
+            );
         }else return 0.0;
     }
 

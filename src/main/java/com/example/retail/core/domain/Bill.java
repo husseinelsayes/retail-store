@@ -1,9 +1,11 @@
 package com.example.retail.core.domain;
 
+import com.example.retail.core.usecase.ProductCategoryEnum;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -18,8 +20,21 @@ public class Bill {
         this.issuedFor = issuedFor;
     }
 
+    public void addProduct(Product product){
+        if(hasNoProductsList()) this.items = new ArrayList<>();
+        this.items.add(product);
+    }
+
     public Double getTotalItemsAmount(){
-        return items == null || items.size() == 0 ? 0.0 : items.stream().map(i -> i.getPrice()).collect(Collectors.summingDouble(Double::doubleValue));
+        return hasNoProductsList() ? 0.0 : items.stream().map(i -> i.getPrice()).collect(Collectors.summingDouble(Double::doubleValue));
+    }
+    public Double getTotalItemsAmountExcludingCategories(ProductCategoryEnum... excludedCategories){
+        if(hasNoProductsList()) return  0.0;
+        Double discountEligibleItemsTotalAmount = items.stream()
+                .filter(i -> !Arrays.asList(excludedCategories).contains(i.getCategory()))
+                .map(i -> i.getPrice()).
+                collect(Collectors.summingDouble(Double::doubleValue));
+        return discountEligibleItemsTotalAmount;
     }
 
     @Override
@@ -32,5 +47,9 @@ public class Bill {
     @Override
     public int hashCode() {
         return Objects.hash(id, issuedFor, issuedAt, items);
+    }
+
+    private Boolean hasNoProductsList(){
+        return items == null;
     }
 }
