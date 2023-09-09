@@ -1,4 +1,4 @@
-package com.example.retail.web.response;
+package com.example.retail.infrastructure.web.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

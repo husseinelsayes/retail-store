@@ -1,6 +1,6 @@
 package com.example.retail.infrastructure.config;
 
-import com.example.retail.core.domain.ProductCategory;
+import com.example.retail.domain.ProductCategory;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

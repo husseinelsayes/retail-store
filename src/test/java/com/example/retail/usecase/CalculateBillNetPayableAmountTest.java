@@ -1,8 +1,8 @@
-package com.example.retail.core.usecase;
+package com.example.retail.usecase;
 
-import com.example.retail.core.domain.Bill;
-import com.example.retail.core.usecase.exception.BillNotFoundException;
-import com.example.retail.core.usecase.exception.CalculateBillEligibleDiscountException;
+import com.example.retail.domain.Bill;
+import com.example.retail.usecase.exception.BillNotFoundException;
+import com.example.retail.usecase.exception.CalculateBillEligibleDiscountException;
 import com.example.retail.infrastructure.CalculateBillNetPayableAmountImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

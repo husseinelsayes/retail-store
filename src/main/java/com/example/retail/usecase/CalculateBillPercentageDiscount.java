@@ -1,6 +1,6 @@
-package com.example.retail.core.usecase;
+package com.example.retail.usecase;
 
-import com.example.retail.core.domain.Bill;
+import com.example.retail.domain.Bill;
 
 public interface CalculateBillPercentageDiscount {
     public Double forBill(Bill bill);

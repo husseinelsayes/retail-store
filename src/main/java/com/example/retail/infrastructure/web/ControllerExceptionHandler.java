@@ -1,7 +1,7 @@
-package com.example.retail.web;
+package com.example.retail.infrastructure.web;
 
-import com.example.retail.core.usecase.exception.BillNotFoundException;
-import com.example.retail.core.usecase.exception.CalculateBillNetPayableAmountException;
+import com.example.retail.usecase.exception.BillNotFoundException;
+import com.example.retail.usecase.exception.CalculateBillNetPayableAmountException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

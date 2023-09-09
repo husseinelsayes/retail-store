@@ -1,7 +1,6 @@
-package com.example.retail.core.usecase;
+package com.example.retail.usecase;
 
-
-import com.example.retail.core.domain.Bill;
+import com.example.retail.domain.Bill;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

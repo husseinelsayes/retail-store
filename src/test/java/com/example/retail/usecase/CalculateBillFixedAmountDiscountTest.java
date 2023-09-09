@@ -1,6 +1,6 @@
-package com.example.retail.core.usecase;
+package com.example.retail.usecase;
 
-import com.example.retail.core.domain.Bill;
+import com.example.retail.domain.Bill;
 import com.example.retail.infrastructure.CalculateBillFixedAmountDiscountImpl;
 import com.example.retail.infrastructure.config.BillFixedDiscountConfig;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,8 +1,8 @@
-package com.example.retail.web;
+package com.example.retail.infrastructure.web;
 
-import com.example.retail.core.usecase.exception.BillNotFoundException;
-import com.example.retail.core.usecase.CalculateBillNetPayableAmount;
-import com.example.retail.core.usecase.exception.CalculateBillNetPayableAmountException;
+import com.example.retail.usecase.exception.BillNotFoundException;
+import com.example.retail.usecase.CalculateBillNetPayableAmount;
+import com.example.retail.usecase.exception.CalculateBillNetPayableAmountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static com.example.retail.web.ControllerExceptionHandler.BILL_NOT_FOUND_MESSAGE_EN;
-import static com.example.retail.web.ControllerExceptionHandler.BILL_PAYABLE_AMOUNT_CALCULATION_ERROR_MESSAGE_EN;
+import static com.example.retail.infrastructure.web.ControllerExceptionHandler.BILL_NOT_FOUND_MESSAGE_EN;
+import static com.example.retail.infrastructure.web.ControllerExceptionHandler.BILL_PAYABLE_AMOUNT_CALCULATION_ERROR_MESSAGE_EN;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

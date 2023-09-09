@@ -1,7 +1,7 @@
 package com.example.retail.infrastructure;
 
-import com.example.retail.core.domain.Bill;
-import com.example.retail.core.usecase.CalculateBillFixedAmountDiscount;
+import com.example.retail.domain.Bill;
+import com.example.retail.usecase.CalculateBillFixedAmountDiscount;
 import com.example.retail.infrastructure.config.BillFixedDiscountConfig;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.example.retail.core.usecase.exception;
+package com.example.retail.usecase.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

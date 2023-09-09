@@ -1,6 +1,6 @@
 package com.example.retail.infrastructure;
 
-import com.example.retail.core.domain.Bill;
+import com.example.retail.domain.Bill;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

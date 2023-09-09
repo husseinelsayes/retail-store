@@ -1,9 +1,9 @@
 package com.example.retail.infrastructure;
 
-import com.example.retail.core.domain.Bill;
-import com.example.retail.core.usecase.CalculateBillEligibleDiscount;
-import com.example.retail.core.usecase.CalculateBillNetPayableAmount;
-import com.example.retail.core.usecase.GetBill;
+import com.example.retail.domain.Bill;
+import com.example.retail.usecase.CalculateBillEligibleDiscount;
+import com.example.retail.usecase.CalculateBillNetPayableAmount;
+import com.example.retail.usecase.GetBill;
 import org.springframework.stereotype.Component;
 
 @Component

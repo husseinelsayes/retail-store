@@ -1,4 +1,4 @@
-package com.example.retail.core.domain;
+package com.example.retail.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.Id;

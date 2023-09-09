@@ -1,7 +1,7 @@
-package com.example.retail.web;
+package com.example.retail.infrastructure.web;
 
-import com.example.retail.core.usecase.CalculateBillNetPayableAmount;
-import com.example.retail.web.response.BillNetPayableAmountResponse;
+import com.example.retail.infrastructure.web.response.BillNetPayableAmountResponse;
+import com.example.retail.usecase.CalculateBillNetPayableAmount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

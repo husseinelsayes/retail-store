@@ -1,6 +1,6 @@
 package com.example.retail.infrastructure;
 
-import com.example.retail.core.domain.DbSequence;
+import com.example.retail.domain.DbSequence;
 import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;

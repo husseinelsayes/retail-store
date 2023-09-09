@@ -1,8 +1,8 @@
 package com.example.retail.infrastructure;
 
-import com.example.retail.core.domain.Bill;
-import com.example.retail.core.usecase.GetBill;
-import com.example.retail.core.usecase.exception.BillNotFoundException;
+import com.example.retail.domain.Bill;
+import com.example.retail.usecase.GetBill;
+import com.example.retail.usecase.exception.BillNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
