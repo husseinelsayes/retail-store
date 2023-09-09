@@ -16,6 +16,7 @@ public class User {
 
     @Id
     private final Long id;
+    private final String fullName;
     private final String email;
     private final UserTypeEnum userType;
     private final LocalDateTime createdAt;

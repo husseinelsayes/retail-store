@@ -91,7 +91,7 @@ class CalculateBillPercentageDiscountTest {
     }
 
     private User mockUser(UserTypeEnum userType, LocalDateTime createdAt){
-        User issuedFor = spy(new User(null,null, null,createdAt));
+        User issuedFor = spy(new User(null,null,null, null,createdAt));
         when(issuedFor.getUserType()).thenReturn(userType);
         return issuedFor;
     }
