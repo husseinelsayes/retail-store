@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -77,6 +78,13 @@ class CalculateBillPercentageDiscountTest {
         Double percentageDiscount = calculateBillPercentageDiscount.forBill(bill);
         assertEquals(450.00,percentageDiscount);
     }
+
+    @Test
+    void givenNotDiscountEligibleUserType_whenCalculatePercentageDiscount_thenThrowException(){
+        Bill bill = existingBill(mockUser(UserTypeEnum.OTHER,LESS_THAN_TWO_YEARS_CREATED_DATE));
+        assertThrows(RuntimeException.class,()-> calculateBillPercentageDiscount.forBill(bill));
+    }
+
 
     private Bill existingBill(User issuedFor) {
         return new Bill(issuedFor);
