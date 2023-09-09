@@ -28,7 +28,7 @@ public class Bill {
         this.issuedFor = issuedFor;
     }
 
-    public void addProduct(Product product){
+    public void addItem(Product product){
         if(items == null) this.items = new ArrayList<>();
         this.items.add(product);
     }
@@ -36,7 +36,7 @@ public class Bill {
     public Double getTotalItemsAmount(){
         return items == null ? 0.0 : items.stream().map(i -> i.getPrice()).collect(Collectors.summingDouble(Double::doubleValue));
     }
-    public Double getTotalItemsAmountExcludingCategories(ProductCategoryEnum... excludedCategories){
+    public Double getTotalItemsAmountExcludingCategories(ProductCategory... excludedCategories){
         if(items == null) return  0.0;
         return items.stream()
                 .filter(i -> !Arrays.asList(excludedCategories).contains(i.getCategory()))

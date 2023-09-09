@@ -1,6 +1,6 @@
 package com.example.retail.infrastructure.config;
 
-import com.example.retail.core.domain.ProductCategoryEnum;
+import com.example.retail.core.domain.ProductCategory;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,7 +18,7 @@ public class BillPercentageDiscountConfig {
     private Double loyalCustomer;
     @NotBlank
     private Integer customerLoyaltyPeriodInYears;
-    private ProductCategoryEnum[] discountExcludedProducts;
+    private ProductCategory[] discountExcludedProducts;
 
     public Double forEmployee(){
         return this.employee;
@@ -36,7 +36,7 @@ public class BillPercentageDiscountConfig {
         return customerLoyaltyPeriodInYears;
     }
 
-    public ProductCategoryEnum[] getDiscountExcludedProducts() {
+    public ProductCategory[] getDiscountExcludedProducts() {
         return discountExcludedProducts;
     }
 }
