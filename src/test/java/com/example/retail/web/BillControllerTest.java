@@ -65,6 +65,14 @@ class BillControllerTest {
         verify(calculateBillNetPayableAmount,times(1)).forBill(EXISTING_BILL_ID);
     }
 
+    @Test
+    void whenNotAuthorized_thenReturn401() throws Exception {
+        mockCalculatePayableAmount();
+        mockMvc.perform(get(String.format("/api/bills/%s/net-payable-amount",EXISTING_BILL_ID))
+                        .contentType("application/json"))
+                .andExpect(status().isUnauthorized());
+    }
+
     private void mockCalculationException() {
         when(calculateBillNetPayableAmount.forBill(EXISTING_BILL_ID)).thenThrow(new CalculateBillNetPayableAmountException(EXISTING_BILL_ID));
     }
