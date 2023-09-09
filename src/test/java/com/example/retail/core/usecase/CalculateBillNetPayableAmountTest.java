@@ -28,11 +28,11 @@ class CalculateBillNetPayableAmountTest {
     private CalculateBillNetPayableAmount calculateBillNetPayableAmount;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         calculateBillNetPayableAmount = new CalculateBillNetPayableAmountImpl(getBill,calculateBillEligibleDiscount);
     }
     @Test
-    public void givenNotFoundBill_thenThrowException(){
+    void givenNotFoundBill_thenThrowException(){
         when(getBill.byId(NON_EXISTING_BILL_ID)).thenThrow(new BillNotFoundException(NON_EXISTING_BILL_ID));
         assertThrows(BillNotFoundException.class, ()->{
             calculateBillNetPayableAmount.forBill(NON_EXISTING_BILL_ID);
@@ -41,14 +41,14 @@ class CalculateBillNetPayableAmountTest {
     }
 
     @Test
-    public void givenExistingBill_thenCalculateEligibleDiscounts(){
+    void givenExistingBill_thenCalculateEligibleDiscounts(){
         when(getBill.byId(EXISTING_BILL_ID)).thenReturn(existingBill());
         calculateBillNetPayableAmount.forBill(EXISTING_BILL_ID);
-        verify(calculateBillEligibleDiscount,times(1)).forBill(eq(existingBill()));
+        verify(calculateBillEligibleDiscount,times(1)).forBill(existingBill());
     }
 
     @Test
-    public void givenCalculatedDiscount_thenApplyOnBillTotalAmount(){
+    void givenCalculatedDiscount_thenApplyOnBillTotalAmount(){
         Bill bill = spy(existingBill());
         when(bill.getTotalItemsAmount()).thenReturn(BILL_ITEMS_TOTAL_AMOUNT_BEFORE_DISCOUNT);
         when(getBill.byId(EXISTING_BILL_ID)).thenReturn(bill);
@@ -58,7 +58,7 @@ class CalculateBillNetPayableAmountTest {
     }
 
     @Test
-    public void whenCalculateDiscountException_thenThrowException(){
+    void whenCalculateDiscountException_thenThrowException(){
         when(calculateBillEligibleDiscount.forBill(any())).thenThrow(new CalculateBillEligibleDiscountException(EXISTING_BILL_ID));
         CalculateBillEligibleDiscountException exception = assertThrows(CalculateBillEligibleDiscountException.class, ()->{
             calculateBillNetPayableAmount.forBill(EXISTING_BILL_ID);

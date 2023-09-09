@@ -6,5 +6,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class CalculateBillNetPayableAmountException extends RuntimeException {
-    private Long billId;
+    private final Long billId;
 }

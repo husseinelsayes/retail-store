@@ -37,7 +37,6 @@ public class CalculateBillPercentageDiscountImpl implements CalculateBillPercent
     }
 
     private Double getLoyalCustomerDiscount(Bill bill){
-        Double customerDiscount = billPercentageDiscountConfig.forLoyalCustomer();
         if(numberOfYearsBetween(bill.getIssuedFor().getCreatedAt(), LocalDateTime.now()) > billPercentageDiscountConfig.getCustomerLoyaltyPeriodInYears()){
             return billPercentageDiscountConfig.forLoyalCustomer() / 100 * bill.getTotalItemsAmountExcludingCategories(
                     billPercentageDiscountConfig.getDiscountExcludedProducts()

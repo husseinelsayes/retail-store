@@ -5,5 +5,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class CalculateBillEligibleDiscountException extends RuntimeException {
-    private Long billId;
+    private final Long billId;
 }

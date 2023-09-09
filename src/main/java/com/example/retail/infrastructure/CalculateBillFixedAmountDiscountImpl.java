@@ -13,9 +13,8 @@ public class CalculateBillFixedAmountDiscountImpl implements CalculateBillFixedA
     @Override
     public Double forBill(Bill bill) {
         Double totalItemsAmount = bill.getTotalItemsAmount();
-        Double aa = totalItemsAmount / billFixedDiscountConfig.getMoneyAmount();
-        Integer numberOfFixedDiscounts = aa.intValue();
-        Double totalFixedDiscount = numberOfFixedDiscounts * billFixedDiscountConfig.getDiscountPerFixedMoneyAmount();
-        return totalFixedDiscount;
+        Double fixedAmountOccurrencesCount = totalItemsAmount / billFixedDiscountConfig.getMoneyAmount();
+        Integer numberOfFixedDiscounts = fixedAmountOccurrencesCount.intValue();
+        return numberOfFixedDiscounts * billFixedDiscountConfig.getDiscountPerFixedMoneyAmount();
     }
 }

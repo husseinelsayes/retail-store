@@ -30,11 +30,11 @@ class CalculateBillPercentageDiscountTest {
     CalculateBillPercentageDiscount calculateBillPercentageDiscount;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         calculateBillPercentageDiscount = new CalculateBillPercentageDiscountImpl(billPercentageDiscountConfig);
     }
     @Test
-    public void givenEmployeeBill_thenCalculateEmployeePercentDiscount(){
+    void givenEmployeeBill_thenCalculateEmployeePercentDiscount(){
         Bill bill = spy(existingBill(mockUser(UserTypeEnum.EMPLOYEE,null)));
         when(bill.getTotalItemsAmountExcludingCategories(any())).thenReturn(BILL_DISCOUNT_ELIGIBLE_TOTAL_ITEMS_AMOUNT);
         when(billPercentageDiscountConfig.forEmployee()).thenReturn(EMPLOYEE_PERCENT_DISCOUNT_AMOUNT);
@@ -43,7 +43,7 @@ class CalculateBillPercentageDiscountTest {
     }
 
     @Test
-    public void givenAffiliateBill_thenCalculateAffiliatePercentDiscount(){
+    void givenAffiliateBill_thenCalculateAffiliatePercentDiscount(){
         Bill bill = spy(existingBill(mockUser(UserTypeEnum.AFFILIATE,null)));
         when(bill.getTotalItemsAmountExcludingCategories(any())).thenReturn(BILL_DISCOUNT_ELIGIBLE_TOTAL_ITEMS_AMOUNT);
         when(billPercentageDiscountConfig.forAffiliate()).thenReturn(AFFILIATE_PERCENT_DISCOUNT_AMOUNT);
@@ -52,7 +52,7 @@ class CalculateBillPercentageDiscountTest {
     }
 
     @Test
-    public void givenBillForPassingLoyaltyPeriodCustomer_thenCalculateLoyalCustomerPercentDiscount(){
+    void givenBillForPassingLoyaltyPeriodCustomer_thenCalculateLoyalCustomerPercentDiscount(){
         Bill bill = spy(existingBill(mockUser(UserTypeEnum.CUSTOMER,MORE_THAN_TWO_YEARS_CREATED_DATE)));
         when(bill.getTotalItemsAmountExcludingCategories(any())).thenReturn(BILL_DISCOUNT_ELIGIBLE_TOTAL_ITEMS_AMOUNT);
         when(billPercentageDiscountConfig.forLoyalCustomer()).thenReturn(LOYAL_CUSTOMER_PERCENT_DISCOUNT_AMOUNT);
@@ -62,7 +62,7 @@ class CalculateBillPercentageDiscountTest {
     }
 
     @Test
-    public void givenBillForNotPassingLoyaltyPeriodCustomer_thenNoPercentDiscountApplied(){
+    void givenBillForNotPassingLoyaltyPeriodCustomer_thenNoPercentDiscountApplied(){
         Bill bill = existingBill(mockUser(UserTypeEnum.CUSTOMER,LESS_THAN_TWO_YEARS_CREATED_DATE));
         when(billPercentageDiscountConfig.getCustomerLoyaltyPeriodInYears()).thenReturn(CUSTOMER_LOYALTY_THRESHOLD_IN_YEARS);
         Double percentageDiscount = calculateBillPercentageDiscount.forBill(bill);
@@ -70,7 +70,7 @@ class CalculateBillPercentageDiscountTest {
     }
 
     @Test
-    public void givenExistingBill_thenApplyDiscountOnAllowedProductsOnly(){
+    void givenExistingBill_thenApplyDiscountOnAllowedProductsOnly(){
         Bill bill = mixedProductsBill();
         when(billPercentageDiscountConfig.getDiscountExcludedProducts()).thenReturn(new ProductCategoryEnum[]{ProductCategoryEnum.GROCERY});
         when(billPercentageDiscountConfig.forEmployee()).thenReturn(EMPLOYEE_PERCENT_DISCOUNT_AMOUNT);

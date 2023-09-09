@@ -29,20 +29,19 @@ public class Bill {
     }
 
     public void addProduct(Product product){
-        if(hasNoProductsList()) this.items = new ArrayList<>();
+        if(items == null) this.items = new ArrayList<>();
         this.items.add(product);
     }
 
     public Double getTotalItemsAmount(){
-        return hasNoProductsList() ? 0.0 : items.stream().map(i -> i.getPrice()).collect(Collectors.summingDouble(Double::doubleValue));
+        return items == null ? 0.0 : items.stream().map(i -> i.getPrice()).collect(Collectors.summingDouble(Double::doubleValue));
     }
     public Double getTotalItemsAmountExcludingCategories(ProductCategoryEnum... excludedCategories){
-        if(hasNoProductsList()) return  0.0;
-        Double discountEligibleItemsTotalAmount = items.stream()
+        if(items == null) return  0.0;
+        return items.stream()
                 .filter(i -> !Arrays.asList(excludedCategories).contains(i.getCategory()))
                 .map(i -> i.getPrice()).
                 collect(Collectors.summingDouble(Double::doubleValue));
-        return discountEligibleItemsTotalAmount;
     }
 
     @Override
@@ -57,7 +56,4 @@ public class Bill {
         return Objects.hash(_id, issuedFor, issuedAt, items);
     }
 
-    private Boolean hasNoProductsList(){
-        return items == null;
-    }
 }

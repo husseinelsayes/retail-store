@@ -22,11 +22,11 @@ class CalculateBillFixedAmountDiscountTest {
     private CalculateBillFixedAmountDiscount calculateBillFixedAmountDiscount;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         calculateBillFixedAmountDiscount = new CalculateBillFixedAmountDiscountImpl(billFixedDiscountConfig);
     }
     @Test
-    public void givenExistingBill_thenApplyFixedDiscountOnEveryFixedAmount(){
+    void givenExistingBill_thenApplyFixedDiscountOnEveryFixedAmount(){
         Bill bill = spy(existingBill());
         when(bill.getTotalItemsAmount()).thenReturn(TOTAL_BILL_AMOUNT);
         when(billFixedDiscountConfig.getMoneyAmount()).thenReturn(DISCOUNT_ELIGIBLE_FIXED_AMOUNT);

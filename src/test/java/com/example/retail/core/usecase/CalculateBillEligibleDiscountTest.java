@@ -24,25 +24,25 @@ class CalculateBillEligibleDiscountTest {
     private CalculateBillEligibleDiscount calculateBillEligibleDiscount;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         calculateBillEligibleDiscount = new CalculateBillEligibleDiscountImpl(calculateBillPercentageDiscount, calculateBillFixedAmountDiscount);
     }
     @Test
-    public void givenExistingBill_thenCalculatePercentageDiscount(){
+    void givenExistingBill_thenCalculatePercentageDiscount(){
         Bill bill = existingBill();
         calculateBillEligibleDiscount.forBill(bill);
-        verify(calculateBillPercentageDiscount,times(1)).forBill(eq(bill));
+        verify(calculateBillPercentageDiscount,times(1)).forBill(bill);
     }
 
     @Test
-    public void givenExistingBill_thenCalculateFixedAmountDiscount(){
+    void givenExistingBill_thenCalculateFixedAmountDiscount(){
         Bill bill = existingBill();
         calculateBillEligibleDiscount.forBill(bill);
-        verify(calculateBillFixedAmountDiscount,times(1)).forBill(eq(bill));
+        verify(calculateBillFixedAmountDiscount,times(1)).forBill(bill);
     }
 
     @Test
-    public void givenExistingBill_thenCalculateAllDiscountTypes(){
+    void givenExistingBill_thenCalculateAllDiscountTypes(){
         Bill bill = existingBill();
         when(calculateBillPercentageDiscount.forBill(bill)).thenReturn(PERCENTAGE_DISCOUNT_AMOUNT);
         when(calculateBillFixedAmountDiscount.forBill(bill)).thenReturn(FIXED_DISCOUNT_AMOUNT);

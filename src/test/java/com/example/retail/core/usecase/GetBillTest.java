@@ -13,7 +13,7 @@ class GetBillTest {
     private GetBill getBill;
 
     @Test
-    public void givenExistingBill_shouldReturnBill(){
+    void givenExistingBill_shouldReturnBill(){
         Bill bill = getBill.byId(1L);
         Assertions.assertNotNull(bill);
     }

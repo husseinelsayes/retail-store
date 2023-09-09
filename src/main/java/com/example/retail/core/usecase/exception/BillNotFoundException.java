@@ -6,5 +6,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class BillNotFoundException extends RuntimeException {
-    private Long billId;
+    private final Long billId;
 }
