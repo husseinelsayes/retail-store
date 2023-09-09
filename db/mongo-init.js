@@ -27,8 +27,41 @@ db.bills.insertOne({
     },
     issuedAt: "2020-07-25T14:10:26.113Z",
     items: [
-        {"productName" : "","category": "GROCERY","price": 100.00},
+        {"productName" : "cucumber","category": "GROCERY","price": 100.00},
         {"productName" : "playstation","category": "ELECTRONIC_DEVICE","price": 300.00},
         {"productName" : "iphone","category": "ELECTRONIC_DEVICE","price": 600.00}
+    ]
+});
+
+db.bills.insertOne({
+    _id: 2,
+    issuedFor: {
+        _id: 2,
+        email: "afiiliate@email.com",
+        userType: "AFFILIATE",
+        createdAt: "2020-07-25T14:10:26.113Z"
+    },
+    issuedAt: "2020-07-25T14:10:26.113Z",
+    items: [
+        {"productName" : "carrot","category": "GROCERY","price": 30.00},
+        {"productName" : "playstation","category": "ELECTRONIC_DEVICE","price": 500.00},
+        {"productName" : "iphone","category": "ELECTRONIC_DEVICE","price": 499.00},
+        {"productName" : "smart TV","category": "ELECTRONIC_DEVICE","price": 1600.00}
+    ]
+});
+
+db.bills.insertOne({
+    _id: 3,
+    issuedFor: {
+        _id: 3,
+        email: "customer@email.com",
+        userType: "CUSTOMER",
+        createdAt: "2020-07-25T14:10:26.113Z"
+    },
+    issuedAt: "2020-07-25T14:10:26.113Z",
+    items: [
+        {"productName" : "tomato","category": "GROCERY","price": 18.00},
+        {"productName" : "nintendo","category": "ELECTRONIC_DEVICE","price": 799.00},
+        {"productName" : "VR","category": "ELECTRONIC_DEVICE","price": 800.00}
     ]
 });
