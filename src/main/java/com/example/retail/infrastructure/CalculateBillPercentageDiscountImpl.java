@@ -5,6 +5,8 @@ import com.example.retail.usecase.CalculateBillPercentageDiscount;
 import com.example.retail.infrastructure.config.BillPercentageDiscountConfig;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -12,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 @AllArgsConstructor
 public class CalculateBillPercentageDiscountImpl implements CalculateBillPercentageDiscount {
     private final BillPercentageDiscountConfig billPercentageDiscountConfig;
+    private final Clock clock;
     @Override
     public Double forBill(Bill bill) {
         switch (bill.getIssuedFor().getUserType()){
@@ -37,7 +40,8 @@ public class CalculateBillPercentageDiscountImpl implements CalculateBillPercent
     }
 
     private Double getLoyalCustomerDiscount(Bill bill){
-        if(numberOfYearsBetween(bill.getIssuedFor().getCreatedAt(), LocalDateTime.now()) > billPercentageDiscountConfig.getCustomerLoyaltyPeriodInYears()){
+        Long dd = numberOfYearsBetween(bill.getIssuedFor().getCreatedAt(), LocalDateTime.now(clock));
+        if(numberOfYearsBetween(bill.getIssuedFor().getCreatedAt(), LocalDateTime.now(clock)) > billPercentageDiscountConfig.getCustomerLoyaltyPeriodInYears()){
             return billPercentageDiscountConfig.forLoyalCustomer() / 100 * bill.getTotalItemsAmountExcludingCategories(
                     billPercentageDiscountConfig.getDiscountExcludedProducts()
             );

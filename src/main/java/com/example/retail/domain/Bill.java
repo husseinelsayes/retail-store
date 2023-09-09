@@ -19,13 +19,14 @@ public class Bill {
     public static final String SEQUENCE_NAME = "bill_seq";
 
     @Id
-    BigInteger _id;
-    User issuedFor;
-    LocalDateTime issuedAt;
+    private BigInteger _id;
+    private User issuedFor;
+    private LocalDateTime issuedAt;
     List<Product> items;
 
-    public Bill(User issuedFor){
+    public Bill(User issuedFor, LocalDateTime issuedAt){
         this.issuedFor = issuedFor;
+        this.issuedAt = issuedAt;
     }
 
     public void addItem(Product product){

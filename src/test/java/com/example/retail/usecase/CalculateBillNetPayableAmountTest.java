@@ -67,7 +67,7 @@ class CalculateBillNetPayableAmountTest {
     }
 
     private Bill existingBill() {
-        return new Bill(null);
+        return new Bill( null, null);
     }
 
 }
