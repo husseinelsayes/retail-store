@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -29,12 +30,14 @@ class BillControllerTest {
     @MockBean
     private CalculateBillNetPayableAmount calculateBillNetPayableAmount;
     @Test
+    @WithMockUser("admin")
     void whenNotValidBillId_thenReturns400() throws Exception {
         mockMvc.perform(get("/api/bills/null/net-payable-amount")
                         .contentType("application/json"))
                 .andExpect(status().isBadRequest());
     }
     @Test
+    @WithMockUser("admin")
     void whenExistingBill_thenCalculateNetPayableAmount() throws Exception {
         mockCalculatePayableAmount();
         mockMvc.perform(get(String.format("/api/bills/%s/net-payable-amount",EXISTING_BILL_ID))
@@ -46,6 +49,7 @@ class BillControllerTest {
     }
 
     @Test
+    @WithMockUser("admin")
     void whenNonExistingBill_thenReturn400AndErrorMessage() throws Exception {
         mockNonExistingBill();
         mockMvc.perform(get(String.format("/api/bills/%s/net-payable-amount",NON_EXISTING_BILL_ID))
@@ -56,6 +60,7 @@ class BillControllerTest {
     }
 
     @Test
+    @WithMockUser("admin")
     void whenCalculatePayableAmountException_thenReturn500AndErrorMessage() throws Exception {
         mockCalculationException();
         mockMvc.perform(get(String.format("/api/bills/%s/net-payable-amount",EXISTING_BILL_ID))
