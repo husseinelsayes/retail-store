@@ -18,7 +18,7 @@ public class CalculateBillPercentageDiscountImpl implements CalculateBillPercent
             case EMPLOYEE : return getEmployeeDiscount(bill);
             case AFFILIATE : return getAffiliateDiscount(bill);
             case CUSTOMER : return getLoyalCustomerDiscount(bill);
-            default: throw new RuntimeException("unknown userType");
+            default: throw new RuntimeException("not discount eligible userType");
         }
     }
 
