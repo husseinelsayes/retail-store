@@ -5,8 +5,10 @@ import com.example.retail.core.usecase.CalculateBillEligibleDiscount;
 import com.example.retail.core.usecase.CalculateBillFixedAmountDiscount;
 import com.example.retail.core.usecase.CalculateBillPercentageDiscount;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
+@Component
 public class CalculateBillEligibleDiscountImpl implements CalculateBillEligibleDiscount {
     private final CalculateBillPercentageDiscount calculateBillPercentageDiscount;
     private final CalculateBillFixedAmountDiscount calculateBillFixedAmountDiscount;

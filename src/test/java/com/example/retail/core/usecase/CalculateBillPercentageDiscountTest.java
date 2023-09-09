@@ -1,9 +1,6 @@
 package com.example.retail.core.usecase;
 
-import com.example.retail.core.domain.Bill;
-import com.example.retail.core.domain.Product;
-import com.example.retail.core.domain.User;
-import com.example.retail.core.domain.UserTypeEnum;
+import com.example.retail.core.domain.*;
 import com.example.retail.infrastructure.config.BillPercentageDiscountConfig;
 import com.example.retail.infrastructure.CalculateBillPercentageDiscountImpl;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,8 +1,11 @@
 package com.example.retail.core.domain;
 
-import com.example.retail.core.usecase.ProductCategoryEnum;
 import lombok.Getter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +13,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 @Getter
+@Document(collection = "bills")
 public class Bill {
-    Long id;
+    @Transient
+    public static final String SEQUENCE_NAME = "bill_seq";
+
+    @Id
+    BigInteger _id;
     User issuedFor;
     LocalDateTime issuedAt;
     List<Product> items;
@@ -41,12 +49,12 @@ public class Bill {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Bill bill)) return false;
-        return Objects.equals(id, bill.id) && Objects.equals(issuedFor, bill.issuedFor) && Objects.equals(issuedAt, bill.issuedAt) && Objects.equals(items, bill.items);
+        return Objects.equals(_id, bill._id) && Objects.equals(issuedFor, bill.issuedFor) && Objects.equals(issuedAt, bill.issuedAt) && Objects.equals(items, bill.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, issuedFor, issuedAt, items);
+        return Objects.hash(_id, issuedFor, issuedAt, items);
     }
 
     private Boolean hasNoProductsList(){

@@ -1,12 +1,14 @@
 package com.example.retail.infrastructure.config;
 
-import com.example.retail.core.usecase.ProductCategoryEnum;
+import com.example.retail.core.domain.ProductCategoryEnum;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties(prefix = "bill.discounts.percentage")
+@Setter
 public class BillPercentageDiscountConfig {
     @NotBlank
     private Double employee;

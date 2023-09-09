@@ -1,6 +1,5 @@
 package com.example.retail.core.domain;
 
-import com.example.retail.core.usecase.ProductCategoryEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
